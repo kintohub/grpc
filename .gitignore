@@ -2,7 +2,6 @@
 .build/
 bins
 gens
-libs
 objs
 
 # Python items
