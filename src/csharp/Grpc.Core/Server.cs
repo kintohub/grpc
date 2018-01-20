@@ -34,6 +34,9 @@ namespace Grpc.Core
     /// </summary>
     public class Server
     {
+        /// <summary>
+        /// Service name for catch all services.
+        /// </summary>
         public const string CatchAllServiceName = "*";
         private static string GrpcCatchAllServiceName = "/" + CatchAllServiceName + "/";
 
