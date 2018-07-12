@@ -22,8 +22,8 @@
 #include <grpc/support/atm.h>
 #include <grpc/support/cpu.h>
 #include <grpc/support/log.h>
-#include <grpc/support/tls.h>
 
+#include "src/core/lib/gpr/tls.h"
 #include "src/core/lib/iomgr/closure.h"
 
 typedef gpr_atm grpc_millis;
@@ -157,10 +157,6 @@ on outside context */
     now_ = new_val;
     now_is_valid_ = true;
   }
-
-  /** Finish any pending work for a grpc_exec_ctx. Must be called before
-   *  the instance is destroyed, or work may be lost. */
-  void Finish();
 
   /** Global initialization for ExecCtx. Called by iomgr */
   static void GlobalInit(void);

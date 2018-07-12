@@ -23,13 +23,12 @@
 #include <pthread.h>
 
 #include <grpc/support/log.h>
-#include <grpc/support/thd.h>
 #include <grpc/support/time.h>
-#include <grpc/support/useful.h>
 
+#include "src/core/lib/gpr/env.h"
+#include "src/core/lib/gpr/thd.h"
 #include "src/core/lib/iomgr/ev_posix.h"
 #include "src/core/lib/iomgr/iomgr_posix.h"
-#include "src/core/lib/support/env.h"
 
 typedef struct poll_args {
   struct pollfd* fds;
@@ -85,7 +84,7 @@ int mock_poll(struct pollfd* fds, nfds_t nfds, int timeout) {
 }
 
 void background_poll(void* args) {
-  poll_args* pargs = (poll_args*)args;
+  poll_args* pargs = static_cast<poll_args*>(args);
   pargs->result = grpc_poll_function(pargs->fds, pargs->nfds, pargs->timeout);
 }
 

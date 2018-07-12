@@ -21,10 +21,10 @@
 
 #include "src/core/ext/filters/client_channel/connector.h"
 #include "src/core/lib/channel/channel_stack.h"
+#include "src/core/lib/gpr/arena.h"
+#include "src/core/lib/gprpp/ref_counted.h"
+#include "src/core/lib/gprpp/ref_counted_ptr.h"
 #include "src/core/lib/iomgr/polling_entity.h"
-#include "src/core/lib/support/arena.h"
-#include "src/core/lib/support/ref_counted.h"
-#include "src/core/lib/support/ref_counted_ptr.h"
 #include "src/core/lib/transport/connectivity_state.h"
 #include "src/core/lib/transport/metadata.h"
 
@@ -68,7 +68,8 @@ typedef struct grpc_subchannel_key grpc_subchannel_key;
 #endif
 
 namespace grpc_core {
-class ConnectedSubchannel : public grpc_core::RefCountedWithTracing {
+
+class ConnectedSubchannel : public RefCountedWithTracing<ConnectedSubchannel> {
  public:
   struct CallArgs {
     grpc_polling_entity* pollent;
@@ -93,6 +94,7 @@ class ConnectedSubchannel : public grpc_core::RefCountedWithTracing {
  private:
   grpc_channel_stack* channel_stack_;
 };
+
 }  // namespace grpc_core
 
 grpc_subchannel* grpc_subchannel_ref(

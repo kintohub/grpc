@@ -34,14 +34,14 @@
 #include <string.h>
 
 #include <grpc/support/alloc.h>
-#include <grpc/support/host_port.h>
 #include <grpc/support/log.h>
 
 #include "src/core/lib/channel/channel_args.h"
 #include "src/core/lib/security/credentials/credentials.h"
-#include "src/core/lib/support/env.h"
-#include "src/core/lib/support/string.h"
-#include "src/core/lib/support/tmpfile.h"
+#include "src/core/lib/gpr/env.h"
+#include "src/core/lib/gpr/host_port.h"
+#include "src/core/lib/gpr/string.h"
+#include "src/core/lib/gpr/tmpfile.h"
 #include "test/core/end2end/data/ssl_test_data.h"
 #include "test/core/util/port.h"
 #include "test/core/util/test_config.h"
@@ -224,8 +224,7 @@ static char *roots_filename;
 }
 
 - (void)testBinaryMetadata {
-  // NOT SUPPORTED
-  //[self testIndividualCase:(char *)"binary_metadata"];
+  [self testIndividualCase:(char *)"binary_metadata"];
 }
 
 - (void)testCallCreds {
